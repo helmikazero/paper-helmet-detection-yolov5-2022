@@ -7,19 +7,29 @@
 \subsection{Perancangan Sistem Deteksi Helm Keselamatan Kerja}
 \label{subsec:perancangansistemdeteksihelmkeselamatankerja}
 
-Sistem deteksi yang dibuat untuk Deteksi Helm Keselamatan kerja sendiri dikembangkan dari sistem deteksi yang sudah ada dari YOLOv5 dengan beberapa perubahan yang disesuaikan khusus untuk judul ini. 
+\par This hardhat detection system will utilize YOLOv5 to make 
+predictions on the input received. Input is an image received from a 
+webcam or camera connected to a computer that will run this system. 
+The system was developed with the aim of detecting the use of work 
+safety helmets in real-time and will run an alarm mechanism if on the 
+camera input there is someone who is not wearing a work safety helmet. 
+The flowchart for the Safety Helmet Detection system can be seen at Figure~\ref{fig:flowchart_sistem}.
 
-Sistem yang dibuat direncanakan akan dijalankan di komputer yang sudah terinstall Python dan framework PyTorch atau ONNX dimana merupakan format yang dihasilkan dari training sebelumnya.
 
-Sistem nya akan dibuat sebagai file script python yang dapat di run dan dapat menerima beberapa parameter : ukuran gambar, sumber input, dan bobot atau weight yang akan digunakan. 
-Input yang dapat digunakan dengan script yang dibuat dapat dilakukan dalam bentuk gambar, file video, link youtube, link stream, dan feed camera dengan basis dari script detect.py dari YOLOv5. Tetapi, yang akan digunakan sebagai default nanti adalah feed dari kamera atau webcam yang tersedia di hardware yang digunakan untuk menjalankan inference. Ukuran atau resolusi gambar yang diterima sebagai ukuran default yaitu 640x640. 
+\par The system will be created as a python script file that can be run and can accept several parameters: 
+input source, weight to be used, confidence threshold, and IoU threshold for the Non Max Suppression process.
+\par Input that can be used with the created script can be done in the form of video files or camera feeds.
+The system can accept various resolutions, but for the inference process, the input dimensions will 
+be resized to 640x640 and the output will be adjusted to the dimensions of the initial input.
 
-Untuk kasus jika input berupa gambar tunggal, gambar tersebut akan digunakan untuk inference melalu model yolov5 dengan bobot yang sudah dibuat sebelumnya lalu hasil inference yolov5 akan menghasilkan beberapa output. Tetapi untuk sistem yang akan dijalankan akan memanfaatkan feed dari camera atau webcam secara realtime sehingga akan dilakukan inference untuk tiap frame yang masuk dari input webcam.
-
-Output yang dikeluarkan dari hasil inferensi menggunakan yolov5 yaitu xcenter, ycenter, width , height, confidence, dan class. Untuk keperluan menampilkan bounding box akan menggunakan xcenter, ycenter, width, dan height yang didapatkan dari output inference yang lalu dilengkapi dengan menampilkan nama class dan confidence score dari inferencenya. 
-
-Untuk fungsi trigger alarm jika terdeteksi adanya orang yang tidak menggunakan helm, untuk hasil output yang dihasilkan dari inference satu frame akan dicheck sekiranya mengandung class “no\textunderscore helmet” yang jika terpenuhi akan  menjalankan perintah untuk mengeprint “NO HELMET DETECTED” pada display dan menjalankan audio alarm. 
-
+\par Each frame that comes in from the input webcam will be used to process inference via
+yolov5 model with weight that has been created previously through the training process.
+The result of inference using YOLOv5 will return the input in the form of position for
+the detected object is in xcenter, ycenter and the dimension of the object is in widht
+and height as well as the name information class and confidence score for
+each detected object. The result of output inference obtained is then used to draw
+bounding box on the frame image being inference
+as in Figure~\ref{fig:outputboundingbox}.
 
 % Contoh input gambar pada kolom.
 \begin{figure} [ht]
@@ -29,7 +39,7 @@ Untuk fungsi trigger alarm jika terdeteksi adanya orang yang tidak menggunakan h
 
   % Ubah sesuai dengan keterangan gambar yang diinginkan.
   \caption{flowchart Sistem}
-  \label{fig:cetakbiru}
+  \label{fig:flowchart_sistem}
 \end{figure}
 
 \subsection{Model YOLOv5}
