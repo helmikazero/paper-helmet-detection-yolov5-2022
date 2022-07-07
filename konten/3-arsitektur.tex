@@ -2,6 +2,33 @@
 \section{Methodology}
 \label{sec:arsitektur}
 
+\subsection{You Only Look Once (YOLO) Model}
+\label{subsec:yolo_base}
+
+\par You Only Look Once or YOLO is a very fast multi-object detection algorithm that was introduced by Redmond et al in 2015 through their book You Only Look Once: Unified, Real-Time Object Detection \cite{redmon2016you}. The Convolutional Neural Network (CNN) is the basis of this YOLO detection system. YOLO performs object detection by considering it as a single regression problem that is taken directly from the pixels in the image into a bounding box marker of coordinates and probability of classification. That way it only needs to be checked once on the image to detect or identify. \cite{redmon2016you} YOLO combines several components of the object text into a single neural network that uses features from all parts of the image to predict each bounding box while simultaneously predicting all bounding boxes in all types of classifications. The design of YOLO allows for end-to-end training and real-time detection speed.
+
+\par The YOLO system itself divides the input image into an S x S grid. The role of the grid here is for later, that is, if a certain grid becomes the center of the object, then that grid will be useful for detecting the object earlier.
+
+\par Each grid predicts each bound box and the value of the possible classification or confidence score of the bounding box. This value represents how "sure" the model is of the object detected in the bounding box and how accurate its prediction is.
+
+\par There are five predicted values in each bounding box, namely: x, y, w, h, and confidence. X and Y represent the center of the bounding box. W and H represent the relative predicted Weight and Height of the entire image. Then the confidence score itself represents the IOU between the predicted box and the ground truth box \cite{redmon2016you}.
+
+\subsubsection{YOLOv5}
+\label{subsecsec:yolov5}
+
+\par YOLOv5 is an updated version of YOLO which was created in 2020 by Glenn Jocher \cite{glenn_jocher_yolov5}. Based on the Github repository for YOLOv5 by Glenn Jocher, the network structure of YOLOv5 is divided into 3 main parts, namely Backbone, Neck, and Head modules. As can be seen in Figure \ref{fig:yolov5network}. 
+
+\par The network structure of YOLOv5 starts from the Backbone module where the input image is passed first to extract features from the image whose structure is based on CSP-Darknet53. But before going through the Backbone, the input image are being pass through the Focus structure. Inside the backbone, the input go through several  Bottleneck CSP Networks (Cross Stage Partial Networks) and then  and Spatial Pyramid Pooling (SPP). The main purpose of the Spatial Pyramid Pooling block is to generate output with the same size regardless of the size of the input frame. The result of feature extraction from Backbone is then used to generate \emph{feature pyramid} in the Neck module which is a structure based on PANet (Path Aggregation Network). Finally, in the Head Module, the information needed to draw bounding box and to tell what class is being detected is generated here which includes some information, namely: class, coordinates, and confidence score.
+
+\begin{figure*} [ht]
+  \centering
+  % Ubah sesuai dengan nama file gambar dan ukuran yang akan digunakan.
+  \includegraphics[width=0.9\textwidth]{gambar/yolov5 structure.png}
+
+  % Ubah sesuai dengan keterangan gambar yang diinginkan.
+  \caption{YOLOv5 Network}
+  \label{fig:yolov5network}
+\end{figure*}
 
 \subsection{Tools and Equipment}
 \label{subsec:toolsandequipment}
@@ -234,7 +261,7 @@
 \par The training process for this title is not carried out with local computer hardware but uses Google Colab Pro where the training process is run in the cloud. The previously collected dataset is downloaded to the Colab Pro vm storage directly from Roboflow. With limitations on the use of storage, ram, and GPU ram as well as runtime provided by Google Colab, checkpoints are stored for each training epoch on the author's drive. This is done for the possibility that in the middle of the VM Colab Pro training session, the VM Colab Pro terminates automatically on itself. 
 
 \subsection{Development of The Hardhat Detection System}
-\label{subsec:perancangansistemdeteksihelmkeselamatankerja}
+\label{subsec:hedect_dev_sys}
 
 \par This hardhat detection system will utilize YOLOv5 to make predictions on the input received. Input is an image received from a webcam or camera connected to a computer that will run this system. The system was developed with the aim of detecting the use of work safety helmets in real-time and will run an alarm mechanism if on the camera input there is someone who is not wearing a work safety helmet. The flowchart for the Safety Helmet Detection system can be seen at Figure~\ref{fig:flowchart_sistem}.
 
@@ -255,7 +282,7 @@ as in Figure~\ref{fig:bboxresult}.
 \begin{figure} [ht]
   \centering
   % Ubah sesuai dengan nama file gambar dan ukuran yang akan digunakan.
-  \includegraphics[width=0.4\textwidth]{gambar/flowchart_sistem.png}
+  \includegraphics[width=0.4\textwidth]{gambar/utilities/sistemhedect.drawio.png}
 
   % Ubah sesuai dengan keterangan gambar yang diinginkan.
   \caption{Hardhat Detection System Flowchart}
@@ -294,31 +321,3 @@ In addition to running the alarm function, it will also run a command to display
 of the output. This is done as a way to benchmark the performance of each model that 
 is being tested in this research where YOLOv5 provides a Small variant to a Large variant. 
 It is expected the larger the model, the smaller the frame per second (FPS) will be.
-
-\subsection{You Only Look Once (YOLO)}
-\label{subsec:yolo_base}
-
-\par You Only Look Once or YOLO is a very fast multi-object detection algorithm that was introduced by Redmond et al in 2015 through their book You Only Look Once: Unified, Real-Time Object Detection \cite{redmon2016you}. The Convolutional Neural Network (CNN) is the basis of this YOLO detection system. YOLO performs object detection by considering it as a single regression problem that is taken directly from the pixels in the image into a bounding box marker of coordinates and probability of classification. That way it only needs to be checked once on the image to detect or identify. \cite{redmon2016you} YOLO combines several components of the object text into a single neural network that uses features from all parts of the image to predict each bounding box while simultaneously predicting all bounding boxes in all types of classifications. The design of YOLO allows for end-to-end training and real-time detection speed.
-
-\par The YOLO system itself divides the input image into an S x S grid. The role of the grid here is for later, that is, if a certain grid becomes the center of the object, then that grid will be useful for detecting the object earlier.
-
-\par Each grid predicts each bound box and the value of the possible classification or confidence score of the bounding box. This value represents how "sure" the model is of the object detected in the bounding box and how accurate its prediction is.
-
-\par There are five predicted values in each bounding box, namely: x, y, w, h, and confidence. X and Y represent the center of the bounding box. W and H represent the relative predicted Weight and Height of the entire image. Then the confidence score itself represents the IOU between the predicted box and the ground truth box \cite{redmon2016you}.
-
-\subsubsection{YOLOv5}
-\label{subsecsec:yolov5}
-
-\par YOLOv5 is an updated version of YOLO which was created in 2020 by Glenn Jocher \cite{glenn_jocher_yolov5}. Based on the Github repository for YOLOv5 by Glenn Jocher, the network structure of YOLOv5 is divided into 3 main parts, namely Backbone, Neck, and Head modules. As can be seen in Figure \ref{fig:yolov5network}. 
-
-\par The network structure of YOLOv5 starts from the Backbone module where the input image is passed first to extract features from the image whose structure is based on CSP-Darknet53. But before going through the Backbone, the input image are being pass through the Focus structure. Inside the backbone, the input go through several  Bottleneck CSP Networks (Cross Stage Partial Networks) and then  and Spatial Pyramid Pooling (SPP). The main purpose of the Spatial Pyramid Pooling block is to generate output with the same size regardless of the size of the input frame. The result of feature extraction from Backbone is then used to generate \emph{feature pyramid} in the Neck module which is a structure based on PANet (Path Aggregation Network). Finally, in the Head Module, the information needed to draw bounding box and to tell what class is being detected is generated here which includes some information, namely: class, coordinates, and confidence score.
-
-\begin{figure*} [ht]
-  \centering
-  % Ubah sesuai dengan nama file gambar dan ukuran yang akan digunakan.
-  \includegraphics[width=0.9\textwidth]{gambar/yolov5 structure.png}
-
-  % Ubah sesuai dengan keterangan gambar yang diinginkan.
-  \caption{YOLOv5 Network}
-  \label{fig:yolov5network}
-\end{figure*}
