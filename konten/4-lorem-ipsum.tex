@@ -2,23 +2,31 @@
 \section{Results and Analysis}
 \label{sec:resultnanalysis}
 
-\par This chapter will discuss the results and analysis of the system design that has been made and its implementation. Testing the results is divided into several parts.
+\par Bab ini akan membahas hasil dan analisa dari desain sistem yang sudah dibuat dan implementasinya. Pengujian terhadap hasil dibagi menjadi beberapa bagian.
 
-\subsection{Model Performance Benchmark}
+\subsection{Pengujian Performa antar \emph{Weight}}
 \label{subsec:modeltest}
 % Ubah paragraf-paragraf pada bagian ini sesuai dengan yang diinginkan.
 
-\par The YOLOv5 repository provides several checkpoints or weights that result from training the YOLOv5 model from the COCO dataset used as a pre-trained model. The expectation of using this pre-trained model is that the resulting weight will perform better than doing training without any pretrained model. This COCO dataset has 80 different classes. However, as mentioned in \ref{subsec:dataset_labeling}, this research, only requires 2 classes, namely "no\_helmet" and "with\_helmet".
+% \par The YOLOv5 repository provides several checkpoints or weights that result from training the YOLOv5 model from the COCO dataset used as a pre-trained model. The expectation of using this pre-trained model is that the resulting weight will perform better than doing training without any pretrained model. This COCO dataset has 80 different classes. However, as mentioned in \ref{subsec:dataset_labeling}, this research, only requires 2 classes, namely "no\_helmet" and "with\_helmet".
 
-\par Some of the pre-trained models provided from the YOLOv5 repository are YOLOv5n, YOLOV5s, YOLOv5m, YOLOv5l, YOLOv5l, and YOLOv5x. In addition to these pre-trained models, there is also a version for the 1280 image size, namely the YOLOv5n6 to YOLOv5l6 series. In this study, only the YOLOv5n to YOLOv5l variations are used because the YOLOv5x variation and the 6 series version for 1280 image sizes take longer. The differences in the pre-trained weights stem from the initial configuration of training on the COCO dataset using YOLOv5, especially the "depth\_multiple" and "width\_multiple" parameters.
+\par Repositori YOLOv5 menyediakan beberapa \emph{checkpoint} atau \emph{weight} yang merupakan hasil training model YOLOv5 dari dataset COCO yang dimanfaatkan sebagai \emph{pretrained model}. Ekspektasi penggunaan pretrained model ini yaitu bobot yang dihasilkan akan memiliki performa yang lebih tinggi daripada melakukan training tanpa pretrained model sama sekali. \emph{COCO Dataset} ini memiliki 80 \emph{class} berbeda. Seperti disebutkan pada \ref{subsec:dataset_labeling} yaitu untuk keperluan penelitian ini hanya memerlukan 2 kelas yaitu "no\textunderscore helmet" dan "with\textunderscore helmet".
 
-\par The validation process of the training results is carried out using the Safety Helmet Detection dataset, whose distribution is described in the \ref{subsec:dataset_preprocessing} section, which consists of 1200 images with the "no\_helmet" class totalling 1322 labels and the "with\_helmet" class totalling 4294 labels.
+% \par Some of the pre-trained models provided from the YOLOv5 repository are YOLOv5n, YOLOV5s, YOLOv5m, YOLOv5l, YOLOv5l, and YOLOv5x. In addition to these pre-trained models, there is also a version for the 1280 image size, namely the YOLOv5n6 to YOLOv5l6 series. In this study, only the YOLOv5n to YOLOv5l variations are used because the YOLOv5x variation and the 6 series version for 1280 image sizes take longer. The differences in the pre-trained weights stem from the initial configuration of training on the COCO dataset using YOLOv5, especially the "depth\_multiple" and "width\_multiple" parameters.
 
-\par In this section, we will compare the performance of each weight generated with the pre-trained model and those without the pre-trained model. This test was carried out using resources from Google Colab. The Google Colab resource specifications used when validating for weights that have been {trained} can be seen in Table~\ref{tb:spekgoogleclab}.
+\par Beberapa \emph{pretrained model} yang disedikana dari repositori YOLOv5 yaitu YOLOv5n, YOLOV5s, YOLOv5m, YOLOv5l,YOLOv5l, dan YOLOv5x. Selain beberapa model pretrained tersebut juga ada versi untuk ukuran gammbar 1280 yaitu seri YOLOv5n6 hingga YOLOv5l6. Pada penelitian ini hanya menggunakan variasi YOLOv5n hingga YOLOv5l karena variasi YOLOv5x dan versi seri 6 untuk ukuran gambar 1280 membutuhkan waktu yang lebih lama. Perbedaan - perbedaan yang ada pada bobot - bobot pretrained tersebut berasal dari konfigurasi awal dari training pada dataset COCO yang menggunakan YOLOv5, terutama pada paramter "depth\textunderscore multiple" dan "width\textunderscore multiple".
+
+% \par The validation process of the training results is carried out using the Safety Helmet Detection dataset, whose distribution is described in the \ref{subsec:dataset_preprocessing} section, which consists of 1200 images with the "no\_helmet" class totalling 1322 labels and the "with\_helmet" class totalling 4294 labels.
+
+\par Proses validasi hasil training dilakukan menggunakan dataset Deteksi Helm Keselamatan Kerja yang pembagiannya dijelaskan pada bagian \ref{subsec:dataset_preprocessing} yang berjumlah 1200 gambar dengan kelas "no\textunderscore helmet" berjumlah 1322 label dan kelas "with\textunderscore helmet" berjumlah 4294 label.
+
+% \par In this section, we will compare the performance of each weight generated with the pre-trained model and those without the pre-trained model. This test was carried out using resources from Google Colab. The Google Colab resource specifications used when validating for weights that have been {trained} can be seen in Table~\ref{tb:spekgoogleclab}.
+
+\par Pada bagian ini akan dipaparkan dan dibandingkan performa antara tiap bobot yang dihasilkan dengan model pretrained dan yang tidak menggunakan pretrained model. Pengujian ini dilakukan menggunakan \emph{resource} dari Google Colab. Spesifikasi \emph{resource} Google Colab yang digunakan saat melakukan validasi untuk bobot yang sudah di-\emph{train} dapat dilihat pada Tabel~\ref{tb:spekgoogleclab}.
 
 \begin{table}
   \centering
-  \caption{Google Colab Resource Specification On Test}
+  \caption{Spesifikasi \emph{Resource} Google Colab Untuk Validasi \emph{Weight}}
   \label{tb:spekgoogleclab}
   \begin{tabular}{|l|l|} 
   \hline
@@ -30,8 +38,6 @@
   \hline
   \end{tabular}
 \end{table}
-
-\par The test conducted on the two methods of training is shown here.
 
 \begin{table*}
   \centering
@@ -60,7 +66,13 @@
   \end{tabular}
 \end{table*}
 
-\par Based on the validation results presented, there is no significant difference in precision, recall, mAP@.5 in either the "with\_helmet" or "no\_helmet" classes, as shown in Figure~\ref{tb:pretrainbenchmarktest}. The precision value is above 0.9, with the highest value being the "hedec\_pretrain\_S" variant. The recall is also not too different between the weights where everything is above the number 0.8, with the highest value being the "hedec\_pretrain\_M" variant.
+% \par Based on the validation results presented, there is no significant difference in precision, recall, mAP@.5 in either the "with\_helmet" or "no\_helmet" classes, as shown in Figure~\ref{tb:pretrainbenchmarktest}. The precision value is above 0.9, with the highest value being the "hedec\_pretrain\_S" variant. The recall is also not too different between the weights where everything is above the number 0.8, with the highest value being the "hedec\_pretrain\_M" variant.
+
+\par Berdasarkan hasil validasi yang dipaparkan, tidak ada perbedaan signifikan dari \emph{precision, recall, mAP} 
+baik pada kelas "with\_helmet" ataupun "no\_helmet" seperti yang ditunjukan pada Tabel~\ref{tb:pretrainbenchmarktest}.
+Untuk nilai \emph{precision} berada di atas 0.9 dengan nilai tertinggi oleh varian "hedec\_pretrain\_S" . Untuk \emph{recall}
+juga tidak terlalu berbeda diantara bobot dimana semuanya berada diatas angka 0.8 dengan bilai teringgi 
+oleh varian "hedec\_pretrain\_M". 
 
 
 \begin{table*}
@@ -90,9 +102,11 @@
   \end{tabular}
 \end{table*}
 
-\par Based on the validation results carried out for the weights that were trained without using Pretrained Weights from YOLOv5, several conclusions are concluded. As can be seen Figure~\ref{tb:purebenchmarktest} for the average of all classes , for precision generally above 0.9 and recall above 0.8, as well as mAP.5 which is above 0.9. But in terms of inference time for each variant, there is not much difference when compared weights are trained using Pretrained Weights from YOLOv5.
+% \par Based on the validation results carried out for the weights that were trained without using Pretrained Weights from YOLOv5, several conclusions are concluded. As can be seen Figure~\ref{tb:purebenchmarktest} for the average of all classes , for precision generally above 0.9 and recall above 0.8, as well as mAP.5 which is above 0.9. But in terms of inference time for each variant, there is not much difference when compared weights are trained using Pretrained Weights from YOLOv5.
 
-\subsection{Model Performance Benchmark on Distance Difference}
+\par Berdasarkan hasil validasi yang dilakukan untuk bobot - bobot yang dilatih tanpa menggunakan \emph{Pretrained Weights} dari YOLOv5 yang dapat ditarik beberapa point.Seperti yang dapat dilihat pada Tabel~\ref{tb:purebenchmarktest}, untuk masing-masing kelas, ntuk \emph{precision} secara umum berada di atas 0.9 dan \emph{recall} di atas 0.8, begitu juga dengan mAP.5 nya yang berada ditas 0.9. Tetapi dari segi \emph{inference time} untuk masing - masin varian, tidak ada perbedaan jauh jika dibandingkan bobot - bobot yang di latih menggunakan \emph{Pretrained Weights}.
+
+\subsection{Pengujian Performa Berdasarkan Jarak}
 \label{subsec:model_rangetest}
 
 \par In this section, we will describe the detection results on the validation dataset, divided into several variations of the distance from the camera. The dataset used includes 8 photos for each distance. All of the weights variant are tested for 1.3 meter to 9 meter. The test result is shown in Figure~\ref{fig:pretrain_dist_test} for weights that trained on pretrained weights and Figure~Figure~\ref{fig:pure_dist_test} for weights trained without the pretrained weights.
