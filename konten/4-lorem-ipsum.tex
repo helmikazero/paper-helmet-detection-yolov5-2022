@@ -109,7 +109,7 @@ oleh varian "hedec\_pretrain\_M".
 \subsection{Pengujian Performa Berdasarkan Jarak}
 \label{subsec:model_rangetest}
 
-\par In this section, we will describe the detection results on the validation dataset, divided into several variations of the distance from the camera. The dataset used includes 8 photos for each distance. All of the weights variant are tested for 1.3 meter to 9 meter. The test result is shown in Figure~\ref{fig:pretrain_dist_test} for weights that trained on pretrained weights and Figure~Figure~\ref{fig:pure_dist_test} for weights trained without the pretrained weights.
+\par Pada bagian ini akan memaparkan hasil deteksi pada dataset validasi yang dibagi menjadi beberapa variasi jarak dari kamera. Dataset yang digunakan meliputi 8 foto untuk jarak 1,3 meter hingga 9 meter. Hasil pengujian ini ditunjukan pada Gambar~\ref{fig:pretrain_dist_test} bobot yang di-\emph{train} menggunakan \emph{Pretrained Weights} dan  Gambar~\ref{fig:pure_dist_test} untuk bobot yang di-\emph{train} tanpa \emph{Pretrained Weights}.
  
 \begin{figure}[ht]
   \centering
@@ -125,25 +125,65 @@ oleh varian "hedec\_pretrain\_M".
   \label{fig:pure_dist_test}  
 \end{figure}
 
-\subsection{Model Performance Benchmark on Low Illuminance}
+\subsection{Pengujian Pada Tingkat Kecerahan Rendah}
 \label{subsec:model_lowillum_test}
 
-\par This section describes the model's performance in detecting low-brightness input images. The validation data contains 35 images with the number of labels no\textunderscore helmet 20 and labels with\textunderscore helmet 57. In addition, validation is carried out on the training results using pre-trained weight and those without pre-trained weight. The test conducted using all the available weight variants as show in Figure~\ref{fig:lowillum_test}.
+% \par This section describes the model's performance in detecting low-brightness input images. The validation data contains 35 images with the number of labels no\textunderscore helmet 20 and labels with\textunderscore helmet 57. In addition, validation is carried out on the training results using pre-trained weight and those without pre-trained weight. The test conducted using all the available weight variants as show in Figure~\ref{fig:lowillum_test}.
+
+\par Bagian ini memaparkan performa model melakukan
+deteksi pada input gambar dengan tingkat kecerahan rendah. Data validasi berisi
+35 gambar dengan jumlah label \emph{no\_helmet} 20 dan label \emph{with\_helmet} 57.
+Validasi dilakukan pada bobot hasil training yang menggunakan \textit{pretrained weight} dan yang tanpa menggunakan \textit{pretrained weight}. Hasil pengujian ini ditunjukkan pada Gambar~\ref{fig:lowillum_test}.
 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.4\textwidth]{gambar/utilities/lowlight_test.png}
-  \caption{Low Illuminance Test}
+  \caption{Pengujian Kecerahan Rendah}
   \label{fig:lowillum_test}  
 \end{figure}
 
-\subsection{Frame Rate Test on Jetson Nano}
-\label{subsec:model_jetsonnano_test}
+% \subsection{Frame Rate Test on Jetson Nano}
+% \label{subsec:model_jetsonnano_test}
 
-\par This section is an explanation of the results of the YOLOv5 Model performance testing when being run on Jetson Nano with the weights that have been previously trained Nano. This test aims to compare the effectiveness of each weight that has been made on the inference performance aspect, considering that the Jetson Nano is a mini-computer with its own Graphics Processing Unit (GPU) and is designed for AI IoT applications. Therefore, the measurement taken in this test is the Frame Per Second (FPS) value.
+% \par This section is an explanation of the results of the YOLOv5 Model performance testing when being run on Jetson Nano with the weights that have been previously trained Nano. This test aims to compare the effectiveness of each weight that has been made on the inference performance aspect, considering that the Jetson Nano is a mini-computer with its own Graphics Processing Unit (GPU) and is designed for AI IoT applications. Therefore, the measurement taken in this test is the Frame Per Second (FPS) value.
 
  
-\par Tests were carried out using the Nemesis NYK A-90 Everest Webcam attached to the Jetson Nano via a USB cable. The tests were carried out at resolutions 256, 480, and 640. The results of the FPS measurement on the YOLOv5 Helmet Detection test are presented in Table~\ref{tb:jetsonano_model_benchmark}.
+% \par Tests were carried out using the Nemesis NYK A-90 Everest Webcam attached to the Jetson Nano via a USB cable. The tests were carried out at resolutions 256, 480, and 640. The results of the FPS measurement on the YOLOv5 Helmet Detection test are presented in Table~\ref{tb:jetsonano_model_benchmark}.
+
+% \begin{table}
+%   \centering
+%   \caption{Jetson Nano Model Framerate Benchmark}
+%   \label{tb:jetsonano_model_benchmark}
+%   \begin{tabular}{|l|l|l|l|} 
+%     \hline
+%     \multirow{2}{*}{\textbf{Nama Bobot}} & \multicolumn{3}{l|}{\textbf{Resolusi}}      \\ 
+%     \cline{2-4}
+%                                          & \textbf{256} & \textbf{480} & \textbf{640}  \\ 
+%     \hline
+%     hedec\_pretrain\_N                   & 24.4         & 22           & 18.5          \\
+%     hedec\_pretrain\_S                   & 22.2         & 13           & 7.8           \\
+%     hedec\_pretrain\_M                   & 15.2         & 5.7          & 3.4           \\
+%     hedec\_pretrain\_L                   & 8            & 3.2          & 1.8           \\
+%     hedec\_pure\_N                       & 24.9         & 21.5         & 18.4          \\
+%     hedec\_pure\_S                       & 23           & 12.3         & 7.8           \\
+%     hedec\_pure\_M                       & 15           & 5.4          & 3.3           \\
+%     hedec\_pure\_L                       & 8.3          & 3            & 1.8           \\
+%     \hline
+%   \end{tabular}
+% \end{table}
+
+\subsection{Pengujian Model YOLOv5 dengan \emph{Helmet Detection Weights} Pada Jetson Nano}
+\label{sec:jetsonnano_hedectest}
+
+\par Bagian ini merupakan pemaparan hasil pengujian performa Model YOLOv5 dengan bobot - bobot yang sudah di\emph{train}
+sebelumnya pada Jetson Nano. Tujuan dari pengujian ini yaitu membandingkan effektifitas dari masing - masing
+bobot yang sudah dibuat pada aspek performa \emph{inference} mengingat Jetson Nano merupakan \emph{mini-computer} yang memiliki
+\emph{Graphic Processing Unit}(GPU)nya sendiri dan memang didesain untuk aplikasi AI IoT. Pengujuran yang diambil pada pengujian ini
+yaitu nilai \emph{Frame Per Second}(FPS).
+
+ 
+\par Pengujian dilakukan menggunakan Webcam Nemesis NYK A-90 Everest yang dipasang dengan Jetson Nano melalui kabel USB. 
+Pengujian dilakukan pada resolusi 640. Hasil pengukuran FPS pada pengujian YOLOv5 Helmet Detection dipaparkan pada Tabel~\ref{tb:jetsonano_model_benchmark}.
 
 \begin{table}
   \centering
@@ -151,34 +191,38 @@ oleh varian "hedec\_pretrain\_M".
   \label{tb:jetsonano_model_benchmark}
   \begin{tabular}{|l|l|l|l|} 
     \hline
-    \multirow{2}{*}{\textbf{Nama Bobot}} & \multicolumn{3}{l|}{\textbf{Resolusi}}      \\ 
-    \cline{2-4}
-                                         & \textbf{256} & \textbf{480} & \textbf{640}  \\ 
+    \textbf{Nama Bobot} & \textbf{FPS}      \\ 
     \hline
-    hedec\_pretrain\_N                   & 24.4         & 22           & 18.5          \\
-    hedec\_pretrain\_S                   & 22.2         & 13           & 7.8           \\
-    hedec\_pretrain\_M                   & 15.2         & 5.7          & 3.4           \\
-    hedec\_pretrain\_L                   & 8            & 3.2          & 1.8           \\
-    hedec\_pure\_N                       & 24.9         & 21.5         & 18.4          \\
-    hedec\_pure\_S                       & 23           & 12.3         & 7.8           \\
-    hedec\_pure\_M                       & 15           & 5.4          & 3.3           \\
-    hedec\_pure\_L                       & 8.3          & 3            & 1.8           \\
+    hedec\_pretrain\_N                             & 18.5          \\
+    hedec\_pretrain\_S                             & 7.8           \\
+    hedec\_pretrain\_M                           & 3.4           \\
+    hedec\_pretrain\_L                            & 1.8           \\
+    hedec\_pure\_N                              & 18.4          \\
+    hedec\_pure\_S                              & 7.8           \\
+    hedec\_pure\_M                              & 3.3           \\
+    hedec\_pure\_L                                 & 1.8           \\
     \hline
   \end{tabular}
 \end{table}
 
 
-\subsection{Hardhat Detection System Field Test}
+\subsection{Pengujian Sistem Deteksi Helm Keselamatan Kerja}
 \label{subsec:hedect_sys_test}
 
-\par This subsection will display various tests on the helmet detection system. The workflow of the Hardhat Detection System is previously explained in Subsec~\ref{subsec:hedect_dev_sys} as also explained on there that the system will trigger an alarm in the form of a siren alarm when there is one or more "no\_helmet" class is detected within the frame. 
+% \par This subsection will display various tests on the helmet detection system. The workflow of the Hardhat Detection System is previously explained in Subsec~\ref{subsec:hedect_dev_sys} as also explained on there that the system will trigger an alarm in the form of a siren alarm when there is one or more "no\_helmet" class is detected within the frame.
 
-\par The tests mostly are done by taking samples of frames from recorded system testing on various conditions: distance difference, low illuminance, CCTV angle, and Jetson Nano run. For this test, as it focuses on "How accurately the system fired the alarm when actually needed to", the "positive" is seen from when the alarm is triggered, and the "negative" are seen from when the alarm is not activated. The variant of weight used in these test is "hedec\_pretrain\_S".
+\par Pada bagian ini akan dipaparkan berbagai macam pengujian terhadap sistem deteksi yang dikembangkan. Seperti yang sebelumnya sudah dijelaskan pada Subab~\ref{subsec:hedect_dev_sys}, sistem deteksi helm keselamatan kerja ini akan menjalankan mekanisme alarm berupa suara audio sirine alarm jika dalam frame terdeteksi satu atau lebih kelas "no\_helmet".
 
-\subsubsection{System Test on Distance Difference}
+% \par The tests mostly are done by taking samples of frames from recorded system testing on various conditions: distance difference, low illuminance, CCTV angle, and Jetson Nano run. For this test, as it focuses on "How accurately the system fired the alarm when actually needed to", the "positive" is seen from when the alarm is triggered, and the "negative" are seen from when the alarm is not activated. The variant of weight used in these test is "hedec\_pretrain\_S".
+
+\par Pengujian - pengujian sebagian besar dilakukan dengan cara mengambil beberapa sampel gambar dari hasil rekaman sistem di beberapa kondisi berbeda : perbedaan jarak, kecerahan rendah, sudut pandang CCTV, dan percobaan penjalanan di SBC Jetson Nano. Pengujian ini berfokus untuk menjawab pertanyaan "Seberapa akurat sistem menyalakan alarm saat alarm memang dibutuhkan untuk dinyalakan?". Sisi "Positif" akan dilihat dari saat alarm dinyalakan dan "Negatif" saat alarm tidak menyala. 
+
+\subsubsection{Pengujain Sistem Pada Perbedaan jarak}
 \label{subsubsec:hedect_test_dist}
 
-\par This test is conducted with the various distance between the camera and the object (person wearing and not wearing a hardhat) observed. The test is conducted by taking samples of frames from a predicted pre-recorded video with a person moving and rotating from 1 meter to 10 meters. The result of each distance variants are shown in Table~\ref{tb:systest_dist_test}.
+% \par This test is conducted with the various distance between the camera and the object (person wearing and not wearing a hardhat) observed. The test is conducted by taking samples of frames from a predicted pre-recorded video with a person moving and rotating from 1 meter to 10 meters. The result of each distance variants are shown in Table~\ref{tb:systest_dist_test}.
+
+\par Pengujian ini dilakukan dengan pada perbedaan jarak antara kamera dengan objek yang diamati (orang yang memakai atau tidak memakai helm keselamatan kerja). Pengujian dilakukan dengan mengambil beberapa sampel gambar dari rekaman yang menjalankan deteksi pada jarak 1 meter hingga 10 meter. Hasil pengujian dari masing - masing jarak ditunjukkan pada Tabel~\ref{tb:systest_dist_test}.
 
 \begin{table}
   \centering
@@ -202,10 +246,12 @@ oleh varian "hedec\_pretrain\_M".
 \end{table}
 
 
-\subsubsection{System Test on CCTV angle}
+\subsubsection{Pengujian Pada Sudut Pandang CCTV}
 \label{subsubsec:hedect_test_cctv}
 
-\par This test is conducted to imitate how CCTV is placed at a checkpoint on a construction site which usually is at a 45-degree angle. The test results are showin in Table~\ref{tb:systest_cctv}.
+% \par This test is conducted to imitate how CCTV is placed at a checkpoint on a construction site which usually is at a 45-degree angle. The test results are showin in Table~\ref{tb:systest_cctv}.
+
+\par Pengujian ini dilakukan dengan tujuan mengimitasi bagaimana CCTV biasanya dipasang pada suatu \emph{checkpoint} di lokasi konstruksi yang biasanya dipasang dengan sudut 45 derajat. Hasil pengujian ini ditunjukan pada Tabel~\ref{tb:systest_cctv}.
 
 \begin{table}
   \centering
@@ -223,14 +269,16 @@ oleh varian "hedec\_pretrain\_M".
 \end{table}
 
 
-\subsubsection{Realtime Detection Test in Jetson Nano}
+\subsubsection{Pengujian \emph{Real-Time} Pada Jetson Nano}
 \label{subsubsec:hedect_test_cctv_jetsonanno}
 
-\par This test is also conducted to imitate how CCTV is placed at a checkpoint on a construction site, usually at a 45-degree angle. But the difference is that the system is being run in real-time. Unlike the other test where the prediction is being done on a pre-recorded video, in this test, the prediction is being run in real-time as the system actively detects using the webcam feeds. The test results are shown in Table~\ref{tb:systest_jetsonnano}.
+% \par This test is also conducted to imitate how CCTV is placed at a checkpoint on a construction site, usually at a 45-degree angle. But the difference is that the system is being run in real-time. Unlike the other test where the prediction is being done on a pre-recorded video, in this test, the prediction is being run in real-time as the system actively detects using the webcam feeds. The test results are shown in Table~\ref{tb:systest_jetsonnano}.
+
+\par Pengujian ini dilakukan dengan memanfaatkan Jetson Nano untuk \emph{deployment} dari sistem deteksi helm keselamatan kerja. Dengan menggunakan camera yang sama dan dipasang dengan sudut yang sama seperti pada Subbab~\ref{subsubsec:hedect_test_cctv} yang lalu dilakukan penjalanan sistem deteksi secara \emph{real-time}. Hasil rekaman penjalanan sistem lalu disimpan dan diambil sejumlah 33 sampel untuk pengujian yang ditunjukan pada Tabel~\ref{tb:systest_jetsonnano}.
 
 \begin{table}
   \centering
-  \caption{Realtime Detection Test in Jetson Nano}
+  \caption{Hasil Pengujian \emph{Real-Time} Pada Jetson Nano}
   \label{tb:systest_jetsonnano}
   \begin{tabular}{|l|l|l|l|l|} 
   \hline
@@ -243,10 +291,13 @@ oleh varian "hedec\_pretrain\_M".
   \end{tabular}
 \end{table}
 
-\subsubsection{System Test in Low Illuminance (Dusk)}
+\subsubsection{Pengujian Sistem Pada Keadaan Rendah Cahaya (Sore)}
 \label{subsubsec:hedect_test_lowillum_dusk}
 
-\par This test is also conducted at a dusk time when illuminance is fairly low, and the sky is still lit. The test result is shown on Table~\ref{tb:systest_lowillum_dusk}. For this test there is 75 samples of test.
+% \par This test is also conducted at a dusk time when illuminance is fairly low, and the sky is still lit. The test result is shown on Table~\ref{tb:systest_lowillum_dusk}. For this test there is 75 samples of test.
+
+\par Pengujian ini juga dilakukan pada waktu senja ketika penerangan cukup rendah, dan langit masih terang. Hasil pengujian dapat dilihat pada Tabel~\ref{tb:systest_lowillum_dusk}. Untuk pengujian ini terdapat 75 sampel pengujian.
+
 
 \begin{table}
   \centering
@@ -263,10 +314,12 @@ oleh varian "hedec\_pretrain\_M".
   \end{tabular}
 \end{table}
 
-\subsubsection{System Test in Low Illuminance (Dark)}
+\subsubsection{Pengujian Sistem Pada Keadaan Rendah Cahaya (Malam)}
 \label{subsubsec:hedect_test_lowillum_dark}
 
-\par This test is also conducted at a dusk time when illuminance is very low with only one light source. The test result is shown on Table~\ref{tb:systest_lowillum_dark}. For this test there is 250 samples of test.
+% \par This test is also conducted at a dusk time when illuminance is very low with only one light source. The test result is shown on Table~\ref{tb:systest_lowillum_dark}. For this test there is 250 samples of test.
+
+\par Tes ini juga dilakukan pada waktu senja ketika penerangan sangat rendah dengan hanya satu sumber cahaya. Hasil pengujian ditunjukkan pada Tabel~\ref{tb:systest_lowillum_dark}. Untuk pengujian ini terdapat 250 sampel pengujian.
 
 \begin{table}
   \centering
