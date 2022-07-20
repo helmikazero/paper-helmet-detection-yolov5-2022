@@ -4,12 +4,19 @@
 
 \par From the results and analysis that have been done in the course of this research on "Hardhat Detection using CNN", several conclusion can be pointed out :
 
-\begin{enumerate}
-    \item It is possible to utilize YOLOv5 object detection architecture to detect when personnel wear the hardhat or not. The test conducted on the model trained on Hardhat Detection Datasets works properly on detecting head without hardhat and head with hardhat, proved by the model performance test on the test set.
-    \item The hardhat detection system, where the system will trigger an alarm when one or more people not wearing a hardhat within the captured frame from the camera, can be run on real-time input from a webcam or prerecorded with an accuracy above 0.7
-    \item False Positive for the “with\_helmet” class and False Negative for the “no\_helmet” class often occur. This is due to the unbalanced available train set for the training process, where From 6,002 images in the dataset, there are 19,985 labels for “with\_helmet” and 6,601 labels for “no\_helmet”.
-    \item The system works well at a distance of 1 m to 10 meters as proved by the test on distance difference conducted on 1 meter with the accuracy of 0.92, 3 meters with the accuracy of 0.97, 5 meter with the accuracy of 1, 7 meters with the accuracy of 1, and 10 meters with the accuracy of 1.
-    \item The hardhat detection system can fairly work in low illuminance condition, as proved from the two tests at a dusk time when its fairly dark but the sky is still lit, with the accuracy of 0.93 and at night time when the background is dark with only one light source with the accuracy of 0.73. 
-    \item The hardhat detection system works properly on Jetson Nano for real-time implementation with the accuracy of 0.93 and with 3-5 frames per second when run on 'hedec\_pretrain\_S' (A small version of the YOLOv5 model trained on hardhat detection dataset with pre-trained YOLOv5s weight)
+\begin{enumerate}[nolistsep]
+
+    \item It is possible to utilize YOLOv5 for hardhat detection as proved in the test of each model with Pretrained Weights from YOLOv5 or without Pretrained Weights for each variant (N,S,M,L) where the average results of every models available : 0.92 for precision,  0.87 for recall and 0.92 for mAP@.5 which also had no significant difference between the variants.
+
+    \item In the inference speed test, if sorted from fastest to slowest, they are Nano(N), Small(S), Medium(M), then Large(L) which also affects frame-rate as indicated in the Jetson Nano test where the N variant gets 18.4 FPS to the L variant which was getting 1.8 FPS
+
+    \item Hardhat detection system can be carried out at a distance of 1 meter to 10 meters as proved by model testing getting an average value at all distances : 0.9 for precision,  0.97 for recall and 0.98 for mAP@.5 and 0.92 for accuracy from the alarm system accuracy test.
+
+    \item The work safety helmet detection system can be carried out in low lighting as evidenced by model testing with the average value of all model variants : 0.76 for precision,  0.74 for recall and 0.78 for mAP@.5 and also from testing the alarm system with the Small variant getting a value of 0.82 for accuracy which indicates a decrease in performance in low lighting.
+
+    \item The work safety helmet detection system can be executed real-time as shown in the system test at Jetson-Nano with an accuracy of 0.92.
+
+    \item Considering the test results of all models where the difference is not too significant for their inference speed, the pretrained YOLOv5s weight from Small(S) model variant is considered the as the optimal choice for real-time hardhat detection which is then also used for all system tests in this research.
+    
 \end{enumerate}
 
