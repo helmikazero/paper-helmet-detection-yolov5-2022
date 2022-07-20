@@ -159,16 +159,17 @@
 
 \par This subsection will display various tests on the helmet detection system. The workflow of the Hardhat Detection System is previously explained in Subsec~\ref{subsec:hedect_dev_sys} as also explained on there that the system will trigger an alarm in the form of a siren alarm when there is one or more "no\_helmet" class is detected within the frame. 
 
-\par The tests mostly are done by taking samples of frames from recorded system testing on various conditions: distance difference, low illuminance, CCTV angle, and Jetson Nano run. For this test, as it focuses on "How accurately the system fired the alarm when actually needed to, the "positive" is seen from when the alarm is triggered, and the "negative" are seen from when the alarm is not activated. The variant of weight used in these test is "hedec\_pretrain\_S".
+\par The tests mostly are done by taking samples of frames from recorded system testing on various conditions: distance difference, low illuminance, CCTV angle, and Jetson Nano run. For this test, as it focuses on "How accurately the system fired the alarm when actually needed to", the "positive" is seen from when the alarm is triggered, and the "negative" are seen from when the alarm is not activated. The variant of weight used in these test is "hedec\_pretrain\_S".
 
 \subsubsection{System Test on Distance Difference}
 \label{subsubsec:hedect_test_dist}
 
-\par This test is conducted with the various distance between the camera and the object (person wearing and not wearing a hardhat) observed. The test is conducted by taking samples of frames from a predicted pre-recorded video with a person moving and rotating from 1 meter to 10 meters. The result of each distance variants
+\par This test is conducted with the various distance between the camera and the object (person wearing and not wearing a hardhat) observed. The test is conducted by taking samples of frames from a predicted pre-recorded video with a person moving and rotating from 1 meter to 10 meters. The result of each distance variants are shown in Table~\ref{tb:systest_dist_test}.
 
 \begin{table}
   \centering
   \caption{System Test on Distance Difference}
+  \label{tb:systest_dist_test}
   \begin{tabular}{|l|l|l|l|l|l|l|} 
   \hline
   Distance & TP & TN & FP & FN & Accuracy     & Samples of Test  \\ 
@@ -241,7 +242,7 @@
   \hline
   TP & TN                    & FP & FN                & accuracy         \\ 
   \hline
-  14 & 17                    & 0  & 2                 & 0.9393939394     \\ 
+  45 & 25                    & 0  & 5                 & 0.9333333333    \\ 
   \hline
   \multicolumn{2}{|l|}{31}   & \multicolumn{2}{l|}{2} & 33 test samples  \\
   \hline
